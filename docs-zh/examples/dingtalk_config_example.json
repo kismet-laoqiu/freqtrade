@@ -1,0 +1,155 @@
+{
+    "$schema": "https://schema.freqtrade.io/schema.json",
+    "trading_mode": "futures",
+    "margin_mode": "isolated",
+    "max_open_trades": 3,
+    "stake_currency": "USDT",
+    "stake_amount": "unlimited",
+    "tradable_balance_ratio": 0.90,
+    "fiat_display_currency": "CNY",
+    "timeframe": "5m",
+    "dry_run": false,
+    "cancel_open_orders_on_exit": true,
+    "use_exit_signal": true,
+    "exit_profit_only": false,
+    "ignore_roi_if_entry_signal": false,
+    "leverage": 3,
+    "unfilledtimeout": {
+        "entry": 10,
+        "exit": 30,
+        "exit_timeout_count": 0,
+        "unit": "minutes"
+    },
+    "entry_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1,
+        "price_last_balance": 0.0,
+        "check_depth_of_market": {
+            "enabled": false,
+            "bids_to_ask_delta": 1
+        }
+    },
+    "exit_pricing": {
+        "price_side": "same",
+        "use_order_book": true,
+        "order_book_top": 1
+    },
+    "exchange": {
+        "name": "bitget",
+        "key": "YOUR_API_KEY_HERE",
+        "secret": "YOUR_API_SECRET_HERE",
+        "password": "YOUR_API_PASSPHRASE_HERE",
+        "ccxt_config": {
+            "enableRateLimit": true,
+            "options": {
+                "defaultType": "swap"
+            }
+        },
+        "ccxt_async_config": {
+            "enableRateLimit": true,
+            "rateLimit": 200
+        },
+        "pair_whitelist": [],
+        "pair_blacklist": [
+            ".*(_PREMIUM|BEAR|BULL|HALF|HEDGE|DOWN|UP|[1235][SL])/.*"
+        ]
+    },
+    "pairlists": [
+        {
+            "method": "StaticPairList",
+            "pairs": [
+                "BTC/USDT:USDT",
+                "ETH/USDT:USDT",
+                "SOL/USDT:USDT",
+                "XRP/USDT:USDT",
+                "AVAX/USDT:USDT"
+            ]
+        }
+    ],
+    "order_types": {
+        "entry": "limit",
+        "exit": "limit",
+        "emergency_exit": "market",
+        "force_entry": "market",
+        "force_exit": "market",
+        "stoploss": "market",
+        "stoploss_on_exchange": true,
+        "stoploss_on_exchange_interval": 60,
+        "stoploss_on_exchange_limit_ratio": 0.99
+    },
+    "stoploss": -0.10,
+    "trailing_stop": true,
+    "trailing_stop_positive": 0.01,
+    "trailing_stop_positive_offset": 0.02,
+    "trailing_only_offset_is_reached": true,
+    "use_custom_stoploss": true,
+    "position_adjustment_enable": true,
+    "max_entry_position_adjustment": 1,
+    "telegram": {
+        "enabled": true,
+        "token": "YOUR_TELEGRAM_BOT_TOKEN",
+        "chat_id": "YOUR_TELEGRAM_CHAT_ID",
+        "notification_settings": {
+            "status": "on",
+            "warning": "on",
+            "startup": "on",
+            "entry": "on",
+            "exit": "on",
+            "entry_fill": "on",
+            "exit_fill": "on"
+        }
+    },
+    "webhook": {
+        "enabled": true,
+        "url": "http://localhost:5000/webhook",
+        "webhookentry": {
+            "value1": "{pair}",
+            "value2": "{stake_amount}",
+            "value3": "{direction}"
+        },
+        "webhookentrycancel": {
+            "value1": "{pair}",
+            "value2": "{stake_amount}",
+            "value3": "entry_cancel"
+        },
+        "webhookentrycancel": {
+            "value1": "{pair}",
+            "value2": "{stake_amount}",
+            "value3": "entry_cancel"
+        },
+        "webhookexit": {
+            "value1": "{pair}",
+            "value2": "{profit_amount}",
+            "value3": "{profit_ratio}"
+        },
+        "webhookexitcancel": {
+            "value1": "{pair}",
+            "value2": "{profit_amount}",
+            "value3": "exit_cancel"
+        },
+        "webhookstatus": {
+            "value1": "{status}",
+            "value2": "{current_rate}",
+            "value3": ""
+        }
+    },
+    "api_server": {
+        "enabled": true,
+        "listen_ip_address": "0.0.0.0",
+        "listen_port": 8080,
+        "verbosity": "info",
+        "jwt_secret_key": "YOUR_JWT_SECRET_KEY_HERE",
+        "CORS_origins": ["http://localhost:8080", "http://127.0.0.1:8080"],
+        "username": "YOUR_API_USERNAME",
+        "password": "YOUR_API_PASSWORD"
+    },
+    "bot_name": "Bitget_3X_DingTalk_Bot",
+    "initial_state": "running",
+    "force_entry_enable": false,
+    "internals": {
+        "process_throttle_secs": 5
+    },
+    "dataformat_ohlcv": "json",
+    "dataformat_trades": "jsongz"
+}
